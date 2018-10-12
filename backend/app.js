@@ -1,7 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Post = require('./models/post');
 
 const app = express();
+
+mongoose.connect('mongodb+srv://Brandon:Legacy123$@cluster0-wdjil.mongodb.net/node-angular?retryWrites=true',
+  { useNewUrlParser: true })
+  .then(() => {
+    console.log('Connected to Database!');
+  })
+  .catch((err) => {
+    console.log('Connection to Database failed!',);
+  })
 
 app.use(bodyParser.json());
 
@@ -13,7 +25,14 @@ app.use((req, res, next) => {
 });
 
 app.post('/posts', (req, res, next) => {
-  const post = req.body;
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  });
+
+  /* Mongoose Model Post will "save" our entry to the DB in a collection default named the plural
+     of our model name (posts) */
+  post.save();
   console.log(post);
   res.status(201).json({
     message: 'Post added Successfully'
@@ -21,25 +40,14 @@ app.post('/posts', (req, res, next) => {
 });
 
 app.get('/posts', (req, res, next) => {
-  posts = [
-    {
-      id: '1',
-      title: 'First title',
-      content: 'content'
-    },
-    {
-      id: '2',
-      title: 'Second title',
-      content: 'content'
-    }
-  ]
-
-  res.status(200).json(
-    {
-      message: 'Posts fetched successfully',
-      posts: posts
-    }
-  );
+  Post.find()
+    .then(documents => {
+      res.status(200).json(
+        {
+          message: 'Posts fetched successfully',
+          posts: documents
+        });
+    });
 });
 
 module.exports = app;
