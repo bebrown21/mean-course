@@ -32,11 +32,13 @@ app.post('/posts', (req, res, next) => {
 
   /* Mongoose Model Post will "save" our entry to the DB in a collection default named the plural
      of our model name (posts) */
-  post.save();
-  console.log(post);
-  res.status(201).json({
-    message: 'Post added Successfully'
-  });
+  post.save()
+    .then((createdPost) => {
+      res.status(201).json({
+        message: 'Post added Successfully',
+        postId: createdPost._id
+      });
+    });
 });
 
 app.get('/posts', (req, res, next) => {
@@ -47,6 +49,15 @@ app.get('/posts', (req, res, next) => {
           message: 'Posts fetched successfully',
           posts: documents
         });
+    });
+});
+
+app.delete('/posts/:id', (req, res, next) =>
+{
+  Post.deleteOne({ _id: req.params.id})
+    .then(result => {
+      console.log(result);
+      res.status(200).json({ message: 'Post Deleted!'});
     });
 });
 
