@@ -1,11 +1,11 @@
 # MeanCourse
 
 ## Development server
-After installing all your npm dependencies with `npm install` (ensure you're using an updated version of node):
+1.) After installing all your npm dependencies with `npm install` (ensure you're using an updated version of node):
 
-Run `ng serve` for a client dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2.) Run `ng serve` for a client dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `npm run start:server` for the backend server.
+3.) In a separate terminal, run `npm run start:server` for the backend server.
 
 ## Build
 
