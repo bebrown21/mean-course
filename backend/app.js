@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const postsRoutes = require('./routes/posts');
 const app = express();
 
-mongoose.connect('mongodb+srv://Brandon:Legacy123$@cluster0-wdjil.mongodb.net/node-angular?retryWrites=true',
+mongoose.connect('mongodb+srv://Brandon:123@cluster0-wdjil.mongodb.net/node-angular?retryWrites=true',
   { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to Database!');
   })
   .catch((err) => {
-    console.log('Connection to Database failed!',);
+    console.log('Connection to Database failed!', err);
   })
 
 app.use(bodyParser.json());
