@@ -3,19 +3,19 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent {
+export class SignupComponent {
   isLoading = false;
 
   constructor(private authService: AuthService) {}
 
-  onLogin(form: NgForm) {
+  onSignup(form: NgForm) {
     if (form.invalid) {
       return;
     }
     this.isLoading = true;
-    this.authService.login(form.value.email, form.value.password);
+    this.authService.createUser(form.value.email, form.value.password);
   }
 }
