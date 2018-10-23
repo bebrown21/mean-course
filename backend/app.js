@@ -7,7 +7,7 @@ const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 const app = express();
 
-mongoose.connect('mongodb+srv://Brandon:123@cluster0-wdjil.mongodb.net/node-angular?retryWrites=true',
+mongoose.connect('mongodb+srv://Brandon:' + process.env.MONGO_ATLAS_PW + '@cluster0-wdjil.mongodb.net/node-angular?retryWrites=true',
   { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to Database!');
